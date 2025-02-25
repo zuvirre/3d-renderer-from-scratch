@@ -1,4 +1,4 @@
-#include "../include/rasterizer.h"
+#include "rasterizer.h"
 #include <algorithm>
 
 void drawTriangle(Frame& frame, int x0, int y0, int x1, int y1, int x2, int y2, Color color) {
