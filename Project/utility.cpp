@@ -91,11 +91,10 @@ namespace Renderer {
     Point &Point::operator=(const Vector4D& coords) {
         data_ = coords;
         return *this;
-    
-    Point &Point::operator=(const Vector3D& coords) {
+    }
+    Point& Point::operator=(const Vector3D& coords) {
         data_.topLeftCorner<3,1>() = coords;
         data_.w() = 1;
-        return *this;
     }
 
     Direction::Direction(const Vector3D& data) {

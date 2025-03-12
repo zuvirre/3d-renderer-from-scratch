@@ -54,6 +54,20 @@ public:
     Point &operator=(const Vector3D &);
     Point &operator=(const Vector4D &);
 
+    template <typename T, class = typename std::enable_if<!std::is_same_v<Vector3D, T> &&
+                                                          std::is_convertible_v<T, Vector3D>>>
+    Point &operator=(const T &val) {
+        return *this = static_cast<Vector3D>(val.eval());
+    }
+
+    template <typename T, typename F,
+              class = typename std::enable_if<!std::is_same_v<Vector4D, T> &&
+                                              !std::is_convertible_v<T, Vector3D> &&
+                                              std::is_convertible_v<T, Vector4D>>>
+    Point &operator=(const T &val) {
+        return *this = static_cast<Vector4D>(val.eval());
+    }
+
 private:
     Vector4D data_ = Vector4D::Ones();
 
@@ -78,8 +92,8 @@ private:
     Vector3D data_ = Vector3D::Zero();
 };
 
-class Vertex {
-    Point coords;
+struct Vertex {
+    Point coordinates;
     Direction normal;
 };
 
