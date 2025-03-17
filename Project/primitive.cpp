@@ -155,4 +155,4 @@ BarycentricSystem::Vector3D BarycentricSystem::ConvertToBarycentricCoordinates(V
     return result;
 }
 
-}  // namespace Renderer
+}
