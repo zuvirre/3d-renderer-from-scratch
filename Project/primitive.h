@@ -40,4 +40,37 @@ private:
     ColorFunction *specular_color_function_ = nullptr;
     NormalFunction *normal_function_ = nullptr;
 };
+
+
+class BarycentricSystem {
+public:
+    using Vector3D = Eigen::Vector3d;
+    using Vector4D = Eigen::Vector4d;
+    using Vector2D = Eigen::Vector2d;
+    using Mat34D = Eigen::Matrix<double, 3, 4>;
+    using Mat3D = Eigen::Matrix3d;
+    using Mat2D = Eigen::Matrix2d;
+
+    BarycentricSystem(const Triangle &original, const Mat34D &transformed);
+    
+    const Triangle &GetTriangle() const;
+    const Mat34D &GetOriginalCoordsMatrix() const;
+
+    static Mat2D MakeBarycentricTransformationMatrix(const Mat3D &coords);
+    static Vector3D TransformToBarycentric(const Mat2D &transformation_matrix, 
+                                           const Mat3D &coords, const Vector2D &point);
+    Vector3D GetOriginalCoordinates(const Vector3D &) const;
+    Vector4D GetNewCoordinates(const Vector3D &) const;
+    Mat3D GetTriangleCoordinates(const Eigen::Vector3<Vector3D> &) const;
+    double InterpolateZCoordinate(const Vector3D &);
+    Color GetColor(const Vector3D &b_coords) const;
+    Vector3D ConvertToBarycentricCoordinates(Vector2D) const;
+    
+private:
+    Triangle triangle_;
+    Mat34D original_coords_matrix_;
+    Mat34D new_coords_matrix_;
+    Mat2D transformation_matrix_;
+
+};
 }
