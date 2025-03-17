@@ -97,4 +97,19 @@ struct Vertex {
     Direction normal;
 };
 
+template <typename T>
+class Iterable {
+public:
+    Iterable(T begin, T end) : begin_(begin), end_(end) {
+    }
+    T begin() {
+        return begin_;
+    }
+    T end() {
+        return end_;
+    }
+ private:
+    T begin_;
+    T end_;
+};
 }
