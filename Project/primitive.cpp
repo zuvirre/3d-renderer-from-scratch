@@ -34,7 +34,7 @@ Triangle::Mat3D Triangle::GetVertsCoords() const {
     return ans;
 }
 
-triangle::Mat34D Triangle::GetVertsHomoCoords() const {
+Triangle::Mat34D Triangle::GetVertsHomoCoords() const {
     Mat34D ans;
     for (int i = 0; i < 3; ++i) {
         ans.row(i) = verticies_[i].coordinates.GetHomogeneousCoordinates();
@@ -42,4 +42,33 @@ triangle::Mat34D Triangle::GetVertsHomoCoords() const {
     return ans;
 }
 
+const Triangle::Vector3D &Triangle::GetRealNormal() const {
+    return normal_;
+}
+
+void Triangle::CalculateNorm() {
+    normal_ =
+        (verticies_[0].coordinates.GetCoordinates() - verticies_[1].coordinates.GetCoordinates())
+            .cross(verticies_[0].coordinates.GetCoordinates() -
+                   verticies_[2].coordinates.GetCoordinates()).normalized();
+    normal_ = -normal_;
+}
+
+Triangle::Vector3D Triangle::GetNormal(const Vector3D &b_coords) const {
+    if (!normal_function_) {
+        return normal_;
+    }
+    return (*normal_function_) (*this, b_coords);
+}
+
+void Triangle::SetColorFunction(const ColorFunction *ambient, const ColorFunction *diffuse,
+                                const ColorFunction *specular) {
+    ambient_color_function_ = ambient;
+    diffuse_color_funcion_ = diffuse;
+    specular_color_function_ = specular;
+}
+
+void Triangle::SetNormalFunction(const NormalFunction *normal) {
+    normal_function_ = normal;
+}
 }
