@@ -49,7 +49,7 @@ public:
     Point(const Vector4D &);
 
     Vector3D GetCoordinates() const;
-    const Vector4D &GetHomogenousCoordinates() const;
+    const Vector4D &GetHomogeneousCoordinates() const;
     double w();
     Point &operator=(const Vector3D &);
     Point &operator=(const Vector4D &);

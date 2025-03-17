@@ -42,6 +42,16 @@ Triangle::Mat34D Triangle::GetVertsHomoCoords() const {
     return ans;
 }
 
+Color Triangle::GetAmbientColor(const Vector3D &b_coords) const {
+    return (*ambient_color_function_)(*this, b_coords);
+}
+Color Triangle::GetDiffuseColor(const Vector3D &b_coords) const {
+    return (*diffuse_color_function_)(*this, b_coords);
+}
+Color Triangle::GetSpecularColor(const Vector3D &b_coords) const {
+    return (*specular_color_function_)(*this, b_coords);
+}
+
 const Triangle::Vector3D &Triangle::GetRealNormal() const {
     return normal_;
 }
@@ -64,11 +74,12 @@ Triangle::Vector3D Triangle::GetNormal(const Vector3D &b_coords) const {
 void Triangle::SetColorFunction(const ColorFunction *ambient, const ColorFunction *diffuse,
                                 const ColorFunction *specular) {
     ambient_color_function_ = ambient;
-    diffuse_color_funcion_ = diffuse;
+    diffuse_color_function_ = diffuse;
     specular_color_function_ = specular;
 }
 
 void Triangle::SetNormalFunction(const NormalFunction *normal) {
     normal_function_ = normal;
 }
+
 }

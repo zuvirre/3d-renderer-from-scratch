@@ -9,8 +9,8 @@ public:
     using Vector3D = Eigen::Vector3d;
     using Mat34D = Eigen::Matrix<double, 3, 4>;
     using Mat3D = Eigen::Matrix3d;
-    using ColorFunction = const std::function<RGB(const Triangle &, const Vector3D &)>;
-    using NormalFunction = const std::function<Vector3D(const Triangle &, const Vector3d &)>;
+    using ColorFunction = const std::function<Color(const Triangle &, const Vector3D &)>;
+    using NormalFunction = const std::function<Vector3D(const Triangle &, const Vector3D &)>;
 
     Triangle() = default;
     Triangle(Mat3D);
@@ -21,6 +21,10 @@ public:
     Mat34D GetVertsHomoCoords() const;
     const Vector3D &GetRealNormal() const;
     void CalculateNorm();
+
+    Color GetAmbientColor(const Vector3D &b_coords) const;
+    Color GetDiffuseColor(const Vector3D &b_coords) const;
+    Color GetSpecularColor(const Vector3D &b_coords) const;
 
     Vector3D GetNormal(const Vector3D &b_coords) const;
     void SetColorFunction(const ColorFunction *ambient,

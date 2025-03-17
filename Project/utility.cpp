@@ -80,7 +80,7 @@ namespace Renderer {
     Point::Vector3D Point::GetCoordinates() const{
         return data_.topLeftCorner<3,1>();
     }
-    const Point::Vector4D &Point::GetHomogenousCoordinates() const {
+    const Point::Vector4D &Point::GetHomogeneousCoordinates() const {
         return data_;
     }
 
