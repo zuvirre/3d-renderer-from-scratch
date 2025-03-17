@@ -13,11 +13,11 @@ public:
     Triangle() = default;
     Triangle(Mat3D);
     Vector3D CalculateCoordsFromBarycentric(const Vector3D&) const;
-    Eigen::Vector3<Vertex> &GetVerts() const;
+    Eigen::Vector3<Vertex> &GetVerts();
+    const Eigen::Vector3<Vertex> &GetVerts() const;
     Mat3D GetVertsCoords() const;
     Mat34D GetVertsHomoCoords() const;
 
-    Vector3D GetNormal(const Vector3D &b_coords) const;
     const Vector3D &GetRealNormal() const;
     void CalculateNorm();
 private:
