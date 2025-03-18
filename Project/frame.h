@@ -1,25 +1,33 @@
-#ifndef FRAME_H
-#define FRAME_H
+#pragma once
 
+#include "utility.h"
+#include "primitive.h"
+#include <Eigen/Dense>
 #include <vector>
 #include <string>
 #include <cstdint>
 
-const int WIDTH = 800;
-const int HEIGHT = 600;
-
-struct Color {
-    uint8_t r, g, b;
-};
-
+namespace Renderer {
 class Frame {
-private:
-    std::vector<Color> pixels;
 public:
-    Frame();  
-    void clear(Color color = {0, 0, 0});
-    void setPixel(int x, int y, Color color);
-    void savePPM(const std::string& filename) const;
-};
+    Frame(size_t width, size_t height);
+    Frame(Frame &&) noexcept = default;
+    Frame(const Frame &) = default;
+    Frame &operator=(const Frame &) = default;
+    Frame &operator=(Frame &&) noexcept = default;
 
-#endif
+    //void clear(Color color = {0, 0, 0});
+    void SetPixel(size_t x, size_t y, const Color &color);
+    void SetZ(size_t x, size_t y, double z);
+    double GetZ(size_t x, size_t y) const;
+
+    const Color &GetPixel(size_t x, size_t column) const;
+    size_t GetWidth() const;
+    size_t GetHeight() const;
+
+    const Eigen::Matrix<Color, Eigen::Dynamic, Eigen::Dynamic> &GetFrameMatrix() const;
+
+private:
+    Eigen::Matrix<Color, Eigen::Dynamic, Eigen::Dynamic> frame_matrix_;
+};
+}
