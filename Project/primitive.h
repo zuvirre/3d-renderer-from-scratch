@@ -1,6 +1,8 @@
 #pragma once
 
 #include "utility.h"
+#include "point.h"
+#include "direction.h"
 #include <Eigen/Dense>
 
 namespace Renderer {
