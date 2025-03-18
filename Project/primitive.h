@@ -6,17 +6,14 @@
 namespace Renderer {
 class Triangle {
 public:
-    using Vector3D = Eigen::Vector3d;
-    using Mat34D = Eigen::Matrix<double, 3, 4>;
-    using Mat3D = Eigen::Matrix3d;
     using ColorFunction = const std::function<Color(const Triangle &, const Vector3D &)>;
     using NormalFunction = const std::function<Vector3D(const Triangle &, const Vector3D &)>;
 
     Triangle() = default;
     Triangle(Mat3D);
     Vector3D CalculateCoordsFromBarycentric(const Vector3D&) const;
-    Eigen::Vector3<Vertex> &GetVerts();
-    const Eigen::Vector3<Vertex> &GetVerts() const;
+    Vector3<Vertex> &GetVerts();
+    const Vector3<Vertex> &GetVerts() const;
     Mat3D GetVertsCoords() const;
     Mat34D GetVertsHomoCoords() const;
     const Vector3D &GetRealNormal() const;
@@ -32,7 +29,7 @@ public:
                           const ColorFunction *specular);
     void SetNormalFunction(const NormalFunction *normal);
 private:
-    Eigen::Vector3<Vertex> verticies_;
+    Vector3<Vertex> verticies_;
     Vector3D normal_;
 
     ColorFunction *ambient_color_function_ = nullptr;
@@ -44,13 +41,6 @@ private:
 
 class BarycentricSystem {
 public:
-    using Vector3D = Eigen::Vector3d;
-    using Vector4D = Eigen::Vector4d;
-    using Vector2D = Eigen::Vector2d;
-    using Mat34D = Eigen::Matrix<double, 3, 4>;
-    using Mat3D = Eigen::Matrix3d;
-    using Mat2D = Eigen::Matrix2d;
-
     BarycentricSystem(const Triangle &original, const Mat34D &transformed);
     
     const Triangle &GetTriangle() const;
@@ -61,7 +51,7 @@ public:
                                            const Mat3D &coords, const Vector2D &point);
     Vector3D GetOriginalCoordinates(const Vector3D &) const;
     Vector4D GetNewCoordinates(const Vector3D &) const;
-    Mat3D GetTriangleCoordinates(const Eigen::Vector3<Vector3D> &) const;
+    Mat3D GetTriangleCoordinates(const Vector3<Vector3D> &) const;
     double InterpolateZCoordinate(const Vector3D &);
     Color GetColor(const Vector3D &b_coords) const;
     Vector3D ConvertToBarycentricCoordinates(Vector2D) const;

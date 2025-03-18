@@ -9,12 +9,9 @@
 namespace Renderer {
 class Mesh {
 public:
-    using Vector3I = Eigen::Vector3i;
     struct Polygon {
         Vector3I points_;
     };
-    using Vector3D = Eigen::Vector3d;
-    using Mat3D = Eigen::Matrix3d;
     using ColorFunction = std::function<Color(const Triangle &, const Vector3D &)>;
     using NormalFunction = std::function<Vector3D(const Triangle &, const Vector3D &)>;
     using VertsConstIterator = std::vector<Vertex>::const_iterator;
@@ -27,8 +24,8 @@ public:
     Iterable<PolygonConstIterator> GetPolygons() const;
 
     Triangle MakeTriangleFromPolygon(const Polygon &) const;
-    void AddTriangle(const Mat3D &);
-    void AddTriangle(const Mat3D &, const Mat3D &);
+    void AddPolygon(const Mat3D &);
+    void AddPolygon(const Mat3D &, const Mat3D &);
 private:
     std::vector<Vertex> vertices_;
     std::vector<Polygon> polygons_;

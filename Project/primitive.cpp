@@ -9,7 +9,7 @@ Triangle::Triangle(Mat3D coords) {
     verticies_.y().coordinates = coords.row(1);
     verticies_.z().coordinates = coords.row(2);
 }
-Triangle::Vector3D Triangle::CalculateCoordsFromBarycentric(
+Vector3D Triangle::CalculateCoordsFromBarycentric(
     const Vector3D &coordinates) const {
         Vector3D ans = Vector3D::Zero();
         ans = verticies_.x().coordinates.GetCoordinates() * coordinates.x() +
@@ -18,15 +18,15 @@ Triangle::Vector3D Triangle::CalculateCoordsFromBarycentric(
         return ans;
 }
 
-Eigen::Vector3<Vertex> &Triangle::GetVerts() {
+Vector3<Vertex> &Triangle::GetVerts() {
     return verticies_;
 }
 
-const Eigen::Vector3<Vertex> &Triangle::GetVerts() const {
+const Vector3<Vertex> &Triangle::GetVerts() const {
     return verticies_;
 }
 
-Triangle::Mat3D Triangle::GetVertsCoords() const {
+Mat3D Triangle::GetVertsCoords() const {
     Mat3D ans;
     ans.row(0) = verticies_.x().coordinates.GetCoordinates();
     ans.row(1) = verticies_.y().coordinates.GetCoordinates();
@@ -34,7 +34,7 @@ Triangle::Mat3D Triangle::GetVertsCoords() const {
     return ans;
 }
 
-Triangle::Mat34D Triangle::GetVertsHomoCoords() const {
+Mat34D Triangle::GetVertsHomoCoords() const {
     Mat34D ans;
     for (int i = 0; i < 3; ++i) {
         ans.row(i) = verticies_[i].coordinates.GetHomogeneousCoordinates();
@@ -52,7 +52,7 @@ Color Triangle::GetSpecularColor(const Vector3D &b_coords) const {
     return (*specular_color_function_)(*this, b_coords);
 }
 
-const Triangle::Vector3D &Triangle::GetRealNormal() const {
+const Vector3D &Triangle::GetRealNormal() const {
     return normal_;
 }
 
@@ -64,7 +64,7 @@ void Triangle::CalculateNorm() {
     normal_ = -normal_;
 }
 
-Triangle::Vector3D Triangle::GetNormal(const Vector3D &b_coords) const {
+Vector3D Triangle::GetNormal(const Vector3D &b_coords) const {
     if (!normal_function_) {
         return normal_;
     }
@@ -97,11 +97,11 @@ const Triangle &BarycentricSystem::GetTriangle() const {
     return triangle_;
 }
 
-const BarycentricSystem::Mat34D &BarycentricSystem::GetOriginalCoordsMatrix() const {
+const Mat34D &BarycentricSystem::GetOriginalCoordsMatrix() const {
     return original_coords_matrix_;
 }
 
-BarycentricSystem::Mat2D BarycentricSystem::MakeBarycentricTransformationMatrix(const Mat3D &coords) {
+Mat2D BarycentricSystem::MakeBarycentricTransformationMatrix(const Mat3D &coords) {
     Mat2D inverse_mat;
     inverse_mat = coords.topLeftCorner<2, 2>().transpose();
     inverse_mat.col(0) -= coords.row(2).topLeftCorner<1, 2>();
@@ -111,7 +111,7 @@ BarycentricSystem::Mat2D BarycentricSystem::MakeBarycentricTransformationMatrix(
     return result;
 }
 
-BarycentricSystem::Vector3D 
+Vector3D 
 BarycentricSystem::TransformToBarycentric(const Mat2D &transformation_matrix,
                                           const Mat3D &coords, const Vector2D &point) {
     Vector3D result;
@@ -122,16 +122,16 @@ BarycentricSystem::TransformToBarycentric(const Mat2D &transformation_matrix,
 
 
 
-BarycentricSystem::Vector3D
+Vector3D
 BarycentricSystem::GetOriginalCoordinates(const Vector3D &coords) const {
     return coords.transpose() * original_coords_matrix_.topLeftCorner<3, 3>();
 }
 
-BarycentricSystem::Vector4D BarycentricSystem::GetNewCoordinates(const Vector3D &coords) const {
+Vector4D BarycentricSystem::GetNewCoordinates(const Vector3D &coords) const {
     return static_cast<Vector4D>(coords.transpose() * new_coords_matrix_);
 }
 
-BarycentricSystem::Mat3D BarycentricSystem::GetTriangleCoordinates(const Eigen::Vector3<Vector3D> &triangle) const {
+Mat3D BarycentricSystem::GetTriangleCoordinates(const Vector3<Vector3D> &triangle) const {
     Mat3D result;
     result.row(0) = GetOriginalCoordinates(triangle.x());
     result.row(1) = GetOriginalCoordinates(triangle.y());
@@ -147,7 +147,7 @@ Color BarycentricSystem::GetColor(const Vector3D &b_coords) const {
     return triangle_.GetAmbientColor(b_coords);
 }
 
-BarycentricSystem::Vector3D BarycentricSystem::ConvertToBarycentricCoordinates(Vector2D vec) const {
+Vector3D BarycentricSystem::ConvertToBarycentricCoordinates(Vector2D vec) const {
     vec -= new_coords_matrix_.row(2).topLeftCorner<1,2>();
     Vector3D result;
     result.topLeftCorner<2, 1>() = transformation_matrix_ * vec;

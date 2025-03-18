@@ -77,10 +77,10 @@ namespace Renderer {
         data_.topLeftCorner<3,1>() = data;
     }
 
-    Point::Vector3D Point::GetCoordinates() const{
+    Vector3D Point::GetCoordinates() const{
         return data_.topLeftCorner<3,1>();
     }
-    const Point::Vector4D &Point::GetHomogeneousCoordinates() const {
+    const Vector4D &Point::GetHomogeneousCoordinates() const {
         return data_;
     }
 
@@ -104,10 +104,10 @@ namespace Renderer {
         data_(data.topLeftCorner<3,1>());
     }
 
-    Direction::Vector3D Direction::GetCoordinates() const {
+    Vector3D Direction::GetCoordinates() const {
         return data_;
     }
-    Direction::Vector4D Direction::GetHomogenousCoordinates() const {
+    Vector4D Direction::GetHomogenousCoordinates() const {
         Vector4D result;
         result.topLeftCorner<3,1>() = data_;
         result.w() = 0;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Eigen/Dense"
 #include "Eigen/src/Core/Matrix.h"
+#include "linearalgebra.h"
 #include <initializer_list>
 #include <list>
 #include <type_traits>
@@ -8,8 +9,6 @@
 namespace Renderer {
 class Color {
     public:
-        using Vector3D = Eigen::Vector3d;
-
         Color(std::initializer_list<double> init) {
         }
         Color() : value_{{0.0,0.0,0.0}} {
@@ -41,9 +40,6 @@ class Color {
 
 class Point {
 public:
-    using Vector3D = Eigen::Vector3d;
-    using Vector4D = Eigen::Vector4d;
-
     Point() = default;
     Point(const Vector3D &);
     Point(const Vector4D &);
@@ -75,9 +71,6 @@ private:
 
 class Direction {
 public:
-    using Vector3D = Eigen::Vector3d;
-    using Vector4D = Eigen::Vector4d;
-
     Direction() = default;
     Direction(const Vector3D &);
     Direction(const Vector4D &);
