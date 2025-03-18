@@ -39,15 +39,19 @@ void Mesh::AddPolygon(const Mat3D &coords) {
   normal.normalize();
   int curr = vertices_.size();
   for (int i = 0; i < 3; ++i) {
-    Vertex vert{.coordinates = static_cast<Vector3D>(coords.row(i).eval()),
-                .normal = normal};
-    vertices_.push_back(vert);
+    vertices_.emplace_back(Vertex{.coordinates = static_cast<Vector3D>(coords.row(i).eval()),
+      .normal = normal});
   }
-  polygons_.push_back(Polygon{Vector3I{curr, curr + 1, curr + 2}});
+  polygons_.emplace_back(Polygon{Vector3I{curr, curr + 1, curr + 2}});
 }
 
 void Mesh::AddPolygon(const Mat3D & coords, const Mat3D &normals) {
-  
+  int curr = vertices_.size();
+  for (int i = 0; i < 3; ++i) {;
+    vertices_.emplace_back(Vertex{.coordinates = static_cast<Vector3D>(coords.row(i).eval()),
+      .normal = static_cast<Vector3D>(normals.row(i).normalized().eval())});
+  }
+  polygons_.emplace_back(Polygon{Vector3I{curr, curr + 1, curr + 2}});
 }
 
 }  // namespace Renderer
