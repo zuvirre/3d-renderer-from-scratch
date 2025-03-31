@@ -17,11 +17,11 @@ public:
     Frame &operator=(Frame &&) noexcept = default;
 
     //void clear(Color color = {0, 0, 0});
-    void SetPixel(size_t x, size_t y, const Color &color);
-    void SetZ(size_t x, size_t y, double z);
-    double GetZ(size_t x, size_t y) const;
+    void SetPixel(size_t row, size_t col, const Color &color);
+    void SetZ(size_t row, size_t col, double z);
+    double GetZ(size_t row, size_t col) const;
 
-    const Color &GetPixel(size_t x, size_t column) const;
+    const Color &GetPixel(size_t row, size_t col) const;
     size_t GetWidth() const;
     size_t GetHeight() const;
 
@@ -29,5 +29,6 @@ public:
 
 private:
     Eigen::Matrix<Color, Eigen::Dynamic, Eigen::Dynamic> frame_matrix_;
+    Eigen::MatrixXd z_buffer_;
 };
 }

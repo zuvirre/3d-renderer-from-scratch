@@ -2,27 +2,38 @@
 #include <fstream>
 #include <iostream>
 
-Frame::Frame() : pixels(WIDTH * HEIGHT, {0, 0, 0}) {}
-
-void Frame::clear(Color color) {
-    std::fill(pixels.begin(), pixels.end(), color);
+namespace Renderer {
+Frame::Frame(int width, int height)
+    : frame_matrix_(height, width), z_buffer_(height, width) {
+    z_buffer_.setZero();
 }
 
-void Frame::setPixel(int x, int y, Color color) {
-    if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT) {
-        pixels[y * WIDTH + x] = color;
-    }
+void Frame::SetPixel(int row, int col, const Color &color) {
+    frame_matrix_(row, col) = color;
 }
 
-void Frame::savePPM(const std::string& filename) const {
-    std::ofstream file(filename, std::ios::binary);
-    if (!file) {
-        std::cerr << "Error: Unable to save image!\n";
-        return;
+void Frame::SetZ(int row, int col, double z) {
+    z_buffer_(row, col) = z;
+}
+
+double Frame::GetZ(int row, int col) const {
+    return z_buffer_(row, col);
+}
+const Color &Frame::GetPixel(int row, int col) const {
+    return frame_matrix_(row,col);
+}
+
+int Frame::GetWidth() const {
+    return frame_matrix_.cols();
+}
+
+int Frame::GetHeight() const {
+    return frame_matrix_.rows();
+}
+
+const Eigen::Matrix<Color, Eigen::Dynamic, Eigen::Dynamic> &Frame::GetFrameMatrix()
+    const {
+        return frame_matrix_;
     }
-    file << "P6\n" << WIDTH << " " << HEIGHT << "\n255\n";
-    for (const auto& pixel : pixels) {
-        file << pixel.r << pixel.g << pixel.b;
-    }
-    file.close();
+
 }
