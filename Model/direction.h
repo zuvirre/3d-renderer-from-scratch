@@ -12,7 +12,7 @@ public:
     Direction(const Vector4D &);
         
     Vector3D GetCoordinates() const;
-    Vector4D GetHomogenousCoordinates() const;
+    Vector4D GetHomogeneousCoordinates() const;
     
     Direction& operator=(const Vector3D &);
     Direction& operator=(const Vector4D &);
