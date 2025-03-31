@@ -10,20 +10,20 @@
 namespace Renderer {
 class Frame {
 public:
-    Frame(size_t width, size_t height);
+    Frame(int width, int height);
     Frame(Frame &&) noexcept = default;
     Frame(const Frame &) = default;
     Frame &operator=(const Frame &) = default;
     Frame &operator=(Frame &&) noexcept = default;
 
     //void clear(Color color = {0, 0, 0});
-    void SetPixel(size_t row, size_t col, const Color &color);
-    void SetZ(size_t row, size_t col, double z);
-    double GetZ(size_t row, size_t col) const;
+    void SetPixel(int row, int col, const Color &color);
+    void SetZ(int row, int col, double z);
+    double GetZ(int row, int col) const;
 
-    const Color &GetPixel(size_t row, size_t col) const;
-    size_t GetWidth() const;
-    size_t GetHeight() const;
+    const Color &GetPixel(int row, int col) const;
+    int GetWidth() const;
+    int GetHeight() const;
 
     const Eigen::Matrix<Color, Eigen::Dynamic, Eigen::Dynamic> &GetFrameMatrix() const;
 

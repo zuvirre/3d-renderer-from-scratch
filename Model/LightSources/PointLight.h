@@ -15,7 +15,7 @@ private:
     static constexpr double DefaultConstantAttenuation = 1;
     static constexpr double DefaultLinearAttenuation = 0.4;
     static constexpr double DefaultQuadraticAttenuation = 0.02;
-    static const Color DefaultColor{1,1,1};
+    static const Color DefaultColor;
 
     double initial_intencity_ = DefaultIntencity;
     double constant_attenuation_ = DefaultConstantAttenuation;
