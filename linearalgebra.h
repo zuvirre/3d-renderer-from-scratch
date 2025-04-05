@@ -7,6 +7,8 @@ namespace Renderer {
     using Vector4D = Eigen::Vector4d;
     using Mat2D = Eigen::Matrix2d;
     using Mat3D = Eigen::Matrix3d;
+    using Mat4D = Eigen::Matrix4d;
     using Mat34D = Eigen::Matrix<double, 3, 4>;
+    using Mat54D = Eigen::Matrix<double, 5, 4>;
     using Vector3I = Eigen::Vector3i;
 }
