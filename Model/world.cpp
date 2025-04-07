@@ -59,7 +59,7 @@ void World::SetCameraPosition(const Vector3D &position) {
 }
 
 const Vector3D &World::CameraHolder::GetCoordinates() const {
-    return coordinates_:
+    return coordinates_;
 }
 const QuatD &World::CameraHolder::GetAngle() const {
     return rotation_;
