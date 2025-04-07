@@ -11,4 +11,5 @@ namespace Renderer {
     using Mat34D = Eigen::Matrix<double, 3, 4>;
     using Mat54D = Eigen::Matrix<double, 5, 4>;
     using Vector3I = Eigen::Vector3i;
+    using QuatD = Eigen::Quaterniond;
 }
