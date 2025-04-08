@@ -14,12 +14,12 @@ Mat3D TransformToScreenSpace(Mat3D triangle, size_t width,
     assert(width != 0);
     assert(height != 0);
     double dwidth = static_cast<double>(width);
-    double dheight = static_cast<double<(height);
+    double dheight = static_cast<double>(height);
 
     triangle.col(0) += Vector3D::Ones();
     triangle.col(0) *= dwidth / 2;
     triangle.col(1) = -triangle.col(1);
-    triangle.col(1) +=Vector3D::Ones();
+    triangle.col(1) += Vector3D::Ones();
     triangle.col(1) *= dheight / 2;
     return triangle;
 }
@@ -93,7 +93,7 @@ void Rasterizer::ShiftLightToAlignCamera(const World &world, LightSourcesDescrip
         world.GetCameraRotation().inverse(),
         world.GetCameraRotation().inverse() * -world.GetCameraPosition());
     for (int i = 0; i < world.GetPointLightSources().size(); ++i) {
-        Vector4D temp = Vector4d::Ones();
+        Vector4D temp = Vector4D::Ones();
         temp.topLeftCorner<3, 1>() = world.GetPointLightSources()[i].GetCoordinates();
         desc->point_light_coordinates_.push_back(transformation_matrix * temp);
     }
@@ -101,21 +101,17 @@ void Rasterizer::ShiftLightToAlignCamera(const World &world, LightSourcesDescrip
 void Rasterizer::ShiftTriangleCoordinates(AnyConstHolderPointer owner, Triangle *vertices) {
     assert(vertices != nullptr);
     Mat34D transformation_matrix =
-        Renderer::MakeHomogeneousTransformationMatrix(owner->GetAngle(), owner->GetCoordinates());
+        Rasterizer::MakeHomogeneousTransformationMatrix(owner->GetAngle(), owner->GetCoordinates());
     Rasterizer::ApplyMatrix(transformation_matrix, &(*vertices));
 }
 
-void Renderer::ShiftTriangleToAlignCamera(const World &world, Triangle *vertices) {
+void Rasterizer::ShiftTriangleToAlignCamera(const World &world, Triangle *vertices) {
     assert(vertices != nullptr);
-    Mat34D transformation_matrix = Renderer::MakeHomogeneousTransformationMatrix(
+    Mat34D transformation_matrix = Rasterizer::MakeHomogeneousTransformationMatrix(
         world.GetCameraRotation().inverse(),
         world.GetCameraRotation().inverse() * -world.GetCameraPosition());
     Rasterizer::ApplyMatrix(transformation_matrix, vertices);
 }
-
-
-
-
 
 std::unique_ptr<Frame> Rasterizer::Draw(const World& world, size_t width, size_t height) {
     std::unique_ptr<Frame> frame(new Frame(width, height));
@@ -387,12 +383,11 @@ ans *= initial_color;
 return ans;
 }
 
-Mat34D Renderer::MakeHomogeneousTransformationMatrix(const QuatD &rotation,
+Mat34D Rasterizer::MakeHomogeneousTransformationMatrix(const QuatD &rotation,
                                                      const Vector3D &offset) {
 
 Mat34D transformation_matrix = Mat34D::Zero();
 transformation_matrix.topLeftCorner<3, 3>() = rotation.toRotationMatrix();
-// transformation_matrix(3, 3) = 1;
 transformation_matrix.col(3).topLeftCorner<3, 1>() = offset;
 return transformation_matrix;
 }

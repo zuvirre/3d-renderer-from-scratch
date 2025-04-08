@@ -18,13 +18,13 @@ public:
     void ToggleLightMarkers();
 
     std::unique_ptr<Frame> Draw(const World &world, size_t width, size_t height);
+    void DrawTriangle(const Mesh::Polygon &current, const Mesh &,
+        AnyConstHolderPointer owner_object, const World &world,
+        const LightSourcesDescription &, Frame *screen);
+
     void ShiftLightToAlignCamera(const World &, LightSourcesDescription *desc);
     void ShiftTriangleCoordinates(const AnyConstHolderPointer owner, Triangle *);
     void ShiftTriangleToAlignCamera(const World &, Triangle *);
-    void DrawTriangle(const Mesh::Polygon &current, const Mesh &,
-                      AnyConstHolderPointer owner_object, const World &world,
-                      const LightSourcesDescription &, Frame *screen);
-
     void RasterizeTriangle(const BarycentricSystem &, const Mat3D &,
                            const World &, const LightSourcesDescription &, Frame *);
 
@@ -51,7 +51,7 @@ public:
 private:
     bool use_blinn_phong_ = true;
     bool render_light_markers_ = true;
-    static Mat3D MakeHomogeneousTransformationMatrix(const QuatD &rotation,
+    static Mat34D MakeHomogeneousTransformationMatrix(const QuatD &rotation,
                                                      const Vector3D &offset);
     static void ApplyMatrix(const Mat34D &, Triangle *);
 };
