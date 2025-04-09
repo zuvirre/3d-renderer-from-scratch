@@ -1,4 +1,6 @@
 #include <exception>
+#include <iostream>
+
 namespace except {
-void react();
+void HandleException();
 }

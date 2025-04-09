@@ -1,19 +1,13 @@
-#include "../Project/frame.h"
-#include "../Project/rasterizer.h"
+#include "app.h"
 #include "except.h"
 #include <iostream>
 
 int main() {
     try {
-        Frame frame;
-        frame.clear({0, 0, 0});
-
-        drawTriangle(frame, 100, 100, 400, 50, 200, 300, {255, 0, 0});
-        drawTriangle(frame, 300, 200, 600, 100, 500, 400, {0, 255, 0});
-        drawTriangle(frame, 150, 400, 450, 350, 250, 550, {0, 0, 255}); 
-        frame.savePPM("output.ppm");
+        Application::Application app;
+        app.Run();
     } catch(...) {
-        except::react();
+        except::HandleException();
     }   
     return 0;
 }

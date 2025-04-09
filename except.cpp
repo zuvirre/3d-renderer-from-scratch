@@ -1,13 +1,13 @@
 #include "except.h"
 
 namespace except {
-void react() {
+void HandleException() {
   try {
     throw;
   } catch(std::exception& e) {
-    // обрабатываешь известные исключения
+    std::cerr << "Application failed with exception:" << e.what();
   } catch(...) {
-    // обрабатываешь незивестные исключения
+    std::cerr << "Application failed with unknown exception";
   }
 }
 }
