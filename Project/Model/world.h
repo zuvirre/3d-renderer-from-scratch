@@ -77,21 +77,21 @@ public:
         void SetAngle(const Eigen::AngleAxis<double> &rotation) {
             rotation_ = rotation;
         }
-        Vector3d GetDirection() const {
+        Vector3D GetDirection() const {
             return {0, 0, -1};
         }
-        Vector3d GetNormal() const {
+        Vector3D GetNormal() const {
             return {0, 1, 0};
         }
-        Vector3d GetDefaultDirection() const {
+        Vector3D GetDefaultDirection() const {
             return {0, 0, -1};
         }
-        Vector3d GetDefaultNormal() const {
+        Vector3D GetDefaultNormal() const {
             return {0, 1, 0};
         }
 
     private:
-        using ColorFunction = const std::function<Color(const Triangle &, const Vector3d &)>;
+        using ColorFunction = const std::function<Color(const Triangle &, const Vector3D &)>;
         Mat3D GetSmallTriangle() const {
             Mat3D result;
             result << 0.05, 0.05, 0, -0.05, 0.05, 0, 0, -0.05, 0;
@@ -99,7 +99,7 @@ public:
         }
 
         Vector3D coordinates_ = World::GetOrigin();
-        QuatD rotation_ = Quaterniond::Identity();
+        QuatD rotation_ = QuatD::Identity();
         Object representing_triangle_;
     };
 

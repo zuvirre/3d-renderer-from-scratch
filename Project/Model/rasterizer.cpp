@@ -1,5 +1,3 @@
-#pragma once
-
 #include "rasterizer.h"
 #include "primitive.h"
 #include <cassert>

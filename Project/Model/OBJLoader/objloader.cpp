@@ -1,6 +1,6 @@
 #include "../../../OBJ-Loader/Source/OBJ_Loader.h"
 #include "objloader.h"
-#include "linearalgebra.h"
+
 #include <iostream>
 #include <filesystem>
 

@@ -2,7 +2,7 @@
 #include <cmath>
 
 namespace interface {
-Screen::RGBa Screen::RBGa::FromColor(Color color) {
+Screen::RGBa Screen::RGBa::FromColor(Color color) {
     RGBa result;
     result.R = color.GetRedInt();
     result.G = color.GetGreenInt();
@@ -29,7 +29,7 @@ sf::Image Screen::MakeImage(const Frame& frame) {
     for (int i = 0; i < frame.GetWidth(); ++i) {
         for (int j = 0; j < frame.GetHeight(); ++j) {
             RGBa color = RGBa::FromColor(frame.GetPixel(j, i));
-            image.setPixel(i, j, sf::Color(color.R, color.G, color.B, color.A));
+            image.setPixel(i, j, sf::Color(color.R, color.G, color.B, color.a));
         }
     }
     return image;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "linearalgebra.h"
+#include "../linearalgebra.h"
 #include "utility.h"
 #include "point.h"
 

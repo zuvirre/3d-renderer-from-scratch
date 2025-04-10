@@ -3,7 +3,7 @@
 #include "../Observer/Observer.h"
 #include "../Model/frame.h"
 #include "../Model/engine.h"
-#include <SFML/Graphics.cpp>
+#include <SFML/Graphics.hpp>
 #include <memory>
 
 namespace interface {
@@ -11,7 +11,7 @@ class Controller {
     using Engine = kernel::Engine;
 
 public:
-    GEngineController(Engine* model);
+    Controller(Engine* model);
     bool HandleEvent(const sf::Event&);    
     void InitEnviroment();
     void HandleStallEvent();

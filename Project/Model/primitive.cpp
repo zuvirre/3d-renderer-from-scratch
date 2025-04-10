@@ -115,7 +115,9 @@ Vector3D
 BarycentricSystem::TransformToBarycentric(const Mat2D &transformation_matrix,
                                           const Mat3D &coords, const Vector2D &point) {
     Vector3D result;
-    result.topLeftCorner<2, 1>() = transformation_matrix * (point - coords.row(2).topLeftCorner<1, 2>());
+    result.topLeftCorner<2, 1>() = point;
+    result.topLeftCorner<2, 1>() -= coords.row(2).topLeftCorner<1, 2>();
+    result.topLeftCorner<2, 1>() = transformation_matrix * result.topLeftCorner<2, 1>();
     result.z() = 1 - result.x() - result.y();
     return result;
 }

@@ -1,16 +1,11 @@
 #pragma once
 
+#pragma "OBJLoader/objloader.h"
 #include "rasterizer.h"
 #include "../Observer/Observer.h"
 #include "frame.h"
 #include "utility.h"
-#include "Eigen/src/Core/Matrix.h"
 #include "primitive.h"
-#include "object.h"
-#include "OBJ-Loader/Source/OBJ_Loader.h"
-#include <algorithm>
-#include <cmath>
-#include <memory>
 
 namespace kernel {
 class Engine {

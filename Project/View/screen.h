@@ -3,7 +3,7 @@
 #include "../Observer/Observer.h"
 #include <memory>
 #include "../Model/frame.h"
-#include <SFML\Graphics.cpp>
+#include <SFML/Graphics.hpp>
 
 namespace interface {
 class Screen {
@@ -13,7 +13,7 @@ class Screen {
     static constexpr uint8_t kTransparent = 255;
     struct RGBa {
         uint8_t R, G, B;
-        uint a = kOpaque;
+        uint8_t a = kOpaque;
         static RGBa FromColor(Color color);
     };
 public:

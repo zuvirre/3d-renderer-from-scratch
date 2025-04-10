@@ -1,3 +1,4 @@
 output.ppm
 CMakeLists.txt
 rasterizer
+build/

@@ -38,8 +38,8 @@ void Camera::InitPerspective() {
 
 Camera::Camera(int width, int height) {
     InitFromConst(width, height);
-    InitPlanes();
     InitPerspective();
+    InitPlanes();
 }
 
 Mat34D Camera::PerspectiveTransformation(const Mat34D& vertices) const {

@@ -1,4 +1,4 @@
-#include <utility.h>
+#include "utility.h"
 #include <cassert>
 #include <iostream>
 
@@ -57,7 +57,7 @@ namespace Renderer {
     }
 
     uint8_t Color::DoubleConvert(double value) {
-        return std::min(std::max(static_cast<uint8_t>(value * 255.0), uint8_t{0}), uint8_t{255});
+        return std::min(std::max(static_cast<uint32_t>(value * 255.0), uint32_t{0}), uint32_t{255});
     }
 
     uint8_t Color::GetRedInt() const {

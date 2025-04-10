@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utility.h"
+#include "../utility.h"
 
 namespace Renderer {
 class AmbientLight {

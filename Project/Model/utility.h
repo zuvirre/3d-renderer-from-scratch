@@ -1,7 +1,7 @@
 #pragma once
 #include "Eigen/Dense"
 #include "Eigen/src/Core/Matrix.h"
-#include "linearalgebra.h"
+#include "../linearalgebra.h"
 #include <initializer_list>
 #include <list>
 #include <type_traits>

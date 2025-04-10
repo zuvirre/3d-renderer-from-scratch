@@ -1,6 +1,7 @@
 #pragma once
-#include "object.h"
-#include "world.h"
+
+#include "../object.h"
+#include "../world.h"
 
 namespace kernel {
 using Object = Renderer::Object;

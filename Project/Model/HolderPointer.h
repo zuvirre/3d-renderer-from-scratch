@@ -1,5 +1,3 @@
-#pragma once
-
 #include <memory>
 #include "mesh.h"
 
@@ -38,7 +36,7 @@ public:
         virtual ~Base() = default;
         using MeshConstIterator = std::vector<Mesh>::const_iterator;
         virtual const Vector3D &GetCoordinates() const = 0;
-        virtual const QuatD GetAngle() const = 0;
+        virtual const QuatD &GetAngle() const = 0;
 
         virtual Vector3D GetDirection() const = 0;
         virtual Vector3D GetNormal() const = 0;
@@ -52,25 +50,25 @@ public:
 
 private:
     template <typename T>
-    class Inner : public InnerBase {
+    class Inner : public Base {
     public:
-        const Vector3d &GetCoordinates() const override {
+        const Vector3D &GetCoordinates() const override {
             return value_->GetCoordinates();
         }
-        const Quaterniond &GetAngle() const override {
+        const QuatD &GetAngle() const override {
             return value_->GetAngle();
         }
 
-        Vector3d GetDirection() const override {
+        Vector3D GetDirection() const override {
             return value_->GetDirection();
         };
-        Vector3d GetNormal() const override {
+        Vector3D GetNormal() const override {
             return value_->GetNormal();
         };
-        Vector3d GetDefaultDirection() const override {
+        Vector3D GetDefaultDirection() const override {
             return value_->GetDefaultDirection();
         }
-        Vector3d GetDefaultNormal() const override {
+        Vector3D GetDefaultNormal() const override {
             return value_->GetDefaultNormal();
         }
         Inner(T &&value) : value_(std::move(value)) {
@@ -79,7 +77,7 @@ private:
         }
 
     private:
-        std::unique_ptr<InnerBase> Clone() const override {
+        std::unique_ptr<Base> Clone() const override {
             return std::make_unique<Inner>(value_);
         }
         T value_;
@@ -151,16 +149,16 @@ private:
             value_->SetAngle(angle);
         };
 
-        Vector3d GetDirection() const override {
+        Vector3D GetDirection() const override {
             return value_->GetDirection();
         };
-        Vector3d GetNormal() const override {
+        Vector3D GetNormal() const override {
             return value_->GetNormal();
         };
-        Vector3d GetDefaultDirection() const override {
+        Vector3D GetDefaultDirection() const override {
             return value_->GetDefaultDirection();
         }
-        Vector3d GetDefaultNormal() const override {
+        Vector3D GetDefaultNormal() const override {
             return value_->GetDefaultNormal();
         }
         Inner(T &&value) : value_(std::move(value)) {

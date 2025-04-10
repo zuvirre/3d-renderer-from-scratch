@@ -1,10 +1,10 @@
-#pragma once
-
 #include "engine.h"
+#include "OBJLoader/objloader.h"
 #include "Eigen/src/Core/Matrix.h"
 #include "primitive.h"
+#include "frame.h"
+#include "utility.h"
 #include "object.h"
-#include "OBJLoader/objloader.h"
 #include <algorithm>
 #include <cmath>
 #include <memory>
@@ -22,7 +22,12 @@ void Engine::InitializeSphereEnv() {
     world_.AddAmbientLight();
     world_.AddPointLight({0,0,4});
     world_.SetCameraPosition({0, 0, 4});
-
+    world_.AddObject(Renderer::Sphere{{1, 1, 1}, {1, 1, 1}, {1, 1, 1}});
+    world_.AddObject(Renderer::Sphere{{1, 1, 0}, {1, 1, 0}, {1, 1, 0}, 0.5}, Vector3D{1, 1, 1});
+    world_.AddObject(Renderer::Sphere{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}, 1.3, 1200},
+                     Vector3D{-1, 1, 1});
+    world_.AddObject(Renderer::Sphere{{0, 1, 1}, {0, 1, 1}, {0, 1, 1}, 1.3, 1200},
+                     Vector3D{-1, 1, 7});
     Update();
 }
 

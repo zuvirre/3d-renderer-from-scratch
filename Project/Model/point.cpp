@@ -26,5 +26,6 @@ namespace Renderer {
     Point& Point::operator=(const Vector3D& coords) {
         data_.topLeftCorner<3,1>() = coords;
         data_.w() = 1;
+        return *this;
     }
 }

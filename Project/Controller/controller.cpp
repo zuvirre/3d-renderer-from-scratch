@@ -28,7 +28,7 @@ void Controller::HandleStallEvent() {
 bool Controller::HandleKeyPressedEvent(const sf::Event::KeyEvent& event) {
     switch (event.code) {
 
-        case sf::Keyboard::Escape:
+        case sf::Keyboard::BackSpace:
             return true;
         case sf::Keyboard::Up:
             pressed_keys_.push_back(sf::Keyboard::Up);
